@@ -1,0 +1,22 @@
+.index-column {
+    background-color: cornflowerblue;
+}
+
+.item-column {
+    background-color: darkgrey;
+}
+
+.tbody, td, tfoot, th, thead, tr::ng-deep {
+    border: white 2px solid;
+}
+
+.table::ng-deep {
+    width: 50%;
+    margin: auto;
+    margin-top: 40px;
+}
+
+.th::ng-deep {
+    width: 20px;
+    text-align: center;
+}

@@ -1,0 +1,11 @@
+<div class="container pagination">
+    <div class="row pagination-fram">
+        <div 
+        class="col-1 pagination-item mx-1" 
+        *ngFor="let item of paginationNumbersArray" 
+        (click)="getTenData(item.title)" 
+        [ngClass]=" item.isSelected ? 'pagination-item-selected' : '' ">
+           {{item.title}}
+        </div>
+    </div>
+</div>

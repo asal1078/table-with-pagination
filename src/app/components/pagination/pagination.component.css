@@ -1,0 +1,23 @@
+.pagination-fram {
+    width: 50%;
+    margin: auto;
+    margin-top: 20px;
+} 
+
+.pagination-item {
+    text-align: center;
+    background-color: rgb(184, 205, 245);
+    color: white;
+    margin-bottom: 5px;
+    transition: all 0.3s;
+}
+
+.pagination-item:hover {
+    background-color: rgb(187, 64, 81);
+    cursor: pointer;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.pagination-item-selected {
+    background-color: rgb(97, 64, 187);
+}
