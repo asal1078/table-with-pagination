@@ -1,7 +1,6 @@
 import { Component, OnInit, Output , EventEmitter} from '@angular/core';
 import { ApiService } from 'src/app/services/api-service/api.service';
 import { LIST } from 'src/app/models/listModel'
-import { map } from 'rxjs';
 import { PaginationNumersModel } from 'src/app/models/pagination-numbers';
 
 @Component({
@@ -13,16 +12,16 @@ export class PaginationComponent implements OnInit {
 
   
   allDatasArray : Array<LIST> = [];
-  paginationNumbersArray : Array<PaginationNumersModel> = [];
+  allPaginationNumbersArray : Array<PaginationNumersModel> = [];
+  visiblePaginationNumbersArray : Array<PaginationNumersModel> = [];
+
   tableDefaulValue: Array<LIST> = [];
   
-  constructor(private service: ApiService) { 
-    
-  }
+  constructor(private service: ApiService) {}
 
   @Output() dataArrayEmit = new EventEmitter();
 
-  ngOnInit(): void {
+  ngOnInit(): void {   
     this.getList();
   }
 
@@ -32,13 +31,14 @@ export class PaginationComponent implements OnInit {
         this.allDatasArray = data;
         this.getPaginationNumbers(this.allDatasArray.length/10);
         this.getTenData(1);
+        this.getPageNumbersVisible(0,6);
       }
     )
   }
 
   public getPaginationNumbers(len : number){
     for(let i=0; i<len; i++){
-      this.paginationNumbersArray.push(
+      this.allPaginationNumbersArray.push(
         {
           title: i+1,
           isSelected: false
@@ -53,8 +53,41 @@ export class PaginationComponent implements OnInit {
   }
 
   public selectingPageNumber(pageNumber: number){
-    this.paginationNumbersArray.forEach(item=> item.isSelected = false);
-    this.paginationNumbersArray.find(item=> item.title == pageNumber)!.isSelected = true;
+    this.allPaginationNumbersArray.forEach(item=> item.isSelected = false);
+    this.allPaginationNumbersArray.find(item=> item.title == pageNumber)!.isSelected = true;
+  }
+
+  public getPageNumbersVisible(start: number , end: number){
+    for(let i=start ; i < end ; i++){
+      this.visiblePaginationNumbersArray.push(this.allPaginationNumbersArray[i])!;
+    }
+  }
+
+  public addPaginationNumber(){
+    var min : number = this.visiblePaginationNumbersArray[0]!.title;
+    var max : number = this.allDatasArray.length/10;
+    if(min + 6 != max){
+      this.visiblePaginationNumbersArray = [];
+      for(let i=min ; i<=min+6 ; i++){
+        this.visiblePaginationNumbersArray.push(this.allPaginationNumbersArray[i]);
+      }
+      min = this.visiblePaginationNumbersArray[0]!.title;
+      this.getTenData(min);
+    }
+    
+  }
+
+  public reducePaginationNumber(){
+    var max : number = this.visiblePaginationNumbersArray[6]!.title;
+    var min : number = this.visiblePaginationNumbersArray[0]!.title;
+    if(min != 1){
+      this.visiblePaginationNumbersArray = [];
+      for(let i=min-1 ; i<=max-1 ; i++){
+        this.visiblePaginationNumbersArray.push(this.allPaginationNumbersArray[i-1]);
+      }
+      min = this.visiblePaginationNumbersArray[0]!.title;
+      this.getTenData(min);
+    }
   }
 
 

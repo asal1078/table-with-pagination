@@ -1,11 +1,17 @@
 <div class="container pagination">
-    <div class="row pagination-fram">
-        <div 
+    <div class="row pagination-fram justify-content-center">
+
+        <div class="pagination-button col-1" (click)="reducePaginationNumber()"> < </div>
+
+        <div
+        *ngFor="let item of visiblePaginationNumbersArray" 
         class="col-1 pagination-item mx-1" 
-        *ngFor="let item of paginationNumbersArray" 
         (click)="getTenData(item.title)" 
         [ngClass]=" item.isSelected ? 'pagination-item-selected' : '' ">
            {{item.title}}
         </div>
+
+        <div class="pagination-button col-1" (click)="addPaginationNumber()"> > </div>
+
     </div>
 </div>
