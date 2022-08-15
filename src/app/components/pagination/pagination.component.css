@@ -6,7 +6,7 @@
 
 .pagination-item {
     text-align: center;
-    background-color: rgb(184, 205, 245);
+    background-color: rgb(175, 220, 230);
     color: white;
     margin-bottom: 5px;
     transition: all 0.3s;
@@ -19,7 +19,7 @@
 }
 
 .pagination-item-selected {
-    background-color: rgb(97, 64, 187);
+    background-color: rgb(69, 165, 169);
 }
 
 .pagination-button {

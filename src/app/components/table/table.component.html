@@ -2,8 +2,8 @@
 <table class="table table-striped">
     <tbody  *ngFor="let item of tableData; let i=index">
       <tr>
-        <th scope="row">{{item.id}}</th>
-        <td>{{item.title}}</td>
+        <th scope="row" class="table-secondary">{{item.id}}</th>
+        <td [ngClass]=" i%2==0 ? 'table-info' : 'table-active' ">{{item.title}}</td>
       </tr>
     </tbody>
   </table>

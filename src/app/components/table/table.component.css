@@ -18,6 +18,5 @@
 }
 
 .th::ng-deep {
-    width: 20px;
-    text-align: center;
+    text-align: center !important;
 }
